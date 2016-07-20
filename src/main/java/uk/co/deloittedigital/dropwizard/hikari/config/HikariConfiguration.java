@@ -77,10 +77,14 @@ public class HikariConfiguration {
         hikariConfig.setCatalog(catalog);
         hikariConfig.setConnectionInitSql(connectionInitSql);
         hikariConfig.setConnectionTestQuery(connectionTestQuery);
-        hikariConfig.setDataSourceClassName(dataSourceClassName);
-        hikariConfig.setDataSourceJNDI(dataSourceJndiName);
-        hikariConfig.setDriverClassName(driverClassName);
-        hikariConfig.setJdbcUrl(jdbcUrl);
+        if(dataSourceClassName != null) {
+            hikariConfig.setDataSourceClassName(dataSourceClassName);
+        } else if (dataSourceJndiName != null){
+            hikariConfig.setDataSourceJNDI(dataSourceJndiName);
+        } else {
+            hikariConfig.setDriverClassName(driverClassName);
+            hikariConfig.setJdbcUrl(jdbcUrl);
+        }
         hikariConfig.setPassword(password);
         hikariConfig.setPoolName(name);
         hikariConfig.setTransactionIsolation(transactionIsolationName);
